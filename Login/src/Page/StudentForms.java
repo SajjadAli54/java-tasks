@@ -1,0 +1,2532 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Page;
+
+import javax.swing.JOptionPane;
+import Page.sms.*;
+import java.awt.Color;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class StudentForms extends javax.swing.JFrame {
+    
+    Vector <Students> students;
+    Vector <Students> deactive;
+    
+
+    /**
+     * Creates new form StudentForms
+     */
+    public StudentForms() {
+        initComponents();
+        students = new Vector<Students>();
+        deactive = new Vector<Students>();
+        populateArrayList();
+        populateDeactiveArrayList();
+        
+        /*
+        String ids = "";
+        for(int i=0;i<students.size();i++){
+            ids += students.get(i).getId()+"\n";
+        }
+        JOptionPane.showMessageDialog(null,ids+students.size()+" "+deactive.size());
+       */
+        
+    }
+    
+    public void saveStudentsToFile(){
+        try(FileOutputStream file = new FileOutputStream("Students.dat");
+           ObjectOutputStream outputFile = new ObjectOutputStream(file)){
+           
+           for(int i=0;i<students.size();i++){
+                           
+               outputFile.writeObject(students.get(i));
+           }
+           JOptionPane.showMessageDialog(null,"Successfully Saved!");
+           
+           file.close();
+           outputFile.close();
+     
+        }
+        catch(IOException e){
+           // JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        
+    }
+    
+    public void populateArrayList(){
+        students.clear();
+        try(FileInputStream file2 = new FileInputStream("Students.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2)){
+            boolean endOfFile = false;
+            while(!endOfFile){
+                
+                try{
+                   students.add((Students)inputFile2.readObject()); 
+                }
+                catch(EOFException e){
+                   endOfFile = true;
+                }
+                catch(Exception e){
+                   // JOptionPane.showMessageDialog(null,e.getMessage());
+                }
+            }
+            file2.close();
+            inputFile2.close();
+        }
+        catch(IOException e){
+            //JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
+    public void saveDeactiveStudentsToFile(){
+        try(FileOutputStream file = new FileOutputStream("DeactivatStd.dat");
+           ObjectOutputStream outputFile = new ObjectOutputStream(file)){
+           
+           for(int i=0;i<deactive.size();i++){
+               
+               outputFile.writeObject(deactive.get(i));
+           }
+           JOptionPane.showMessageDialog(null,"Successfully Deactivated!");
+           
+           file.close();
+           outputFile.close();
+        }
+        catch(IOException e){
+           // JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        
+    }
+    
+    public void populateDeactiveArrayList(){
+        deactive.clear();
+        try(FileInputStream file2 = new FileInputStream("DeactivatStd.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2)){
+            boolean endOfFile = false;
+            while(!endOfFile){
+                
+                try{
+                   deactive.add((Students)inputFile2.readObject()); 
+                }
+                catch(EOFException e){
+                   endOfFile = true;
+                }
+                catch(Exception e){
+                   // JOptionPane.showMessageDialog(null,e.getMessage());
+                }
+            }
+            inputFile2.close();
+            file2.close();
+        }
+        catch(IOException e){
+            //JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
+    public void saveEditStudentsToFile(){
+        try(FileOutputStream file = new FileOutputStream("Students.dat");
+           ObjectOutputStream outputFile = new ObjectOutputStream(file)){
+           
+           for(int i=0;i<students.size();i++){
+               
+               outputFile.writeObject(students.get(i));
+           }
+           JOptionPane.showMessageDialog(null,"Successfully Edited!");
+           
+           file.close();
+           outputFile.close();
+        }
+        catch(IOException e){
+           // JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        
+    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        Search = new javax.swing.JLabel();
+        SearchStd = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        GLine = new javax.swing.JLabel();
+        addemp = new javax.swing.JLabel();
+        addempLine = new javax.swing.JLabel();
+        AddStd = new javax.swing.JButton();
+        EditLine = new javax.swing.JLabel();
+        delLine = new javax.swing.JLabel();
+        SearchLine = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        editEmp = new javax.swing.JLabel();
+        Delemp = new javax.swing.JLabel();
+        generateList = new javax.swing.JLabel();
+        GenerateList = new javax.swing.JButton();
+        DeleteStd = new javax.swing.JButton();
+        EditStd = new javax.swing.JButton();
+        StatisticReport = new javax.swing.JButton();
+        lgout = new javax.swing.JLabel();
+        Logout = new javax.swing.JButton();
+        stf = new javax.swing.JLabel();
+        StaffPortal = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        Menu = new javax.swing.JLabel();
+        HideBar = new javax.swing.JPanel();
+        Forms = new javax.swing.JTabbedPane();
+        AddStudent = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        Nationality = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        Address = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        FirstName = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        LastName = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        FatherName = new javax.swing.JTextField();
+        DOB = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        GMALE = new javax.swing.JRadioButton();
+        GFEMALE = new javax.swing.JRadioButton();
+        jLabel15 = new javax.swing.JLabel();
+        Classes = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        FatherCNIC1 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        Surname1 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        rel = new javax.swing.JComboBox<>();
+        SaveData = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        Contact = new javax.swing.JLabel();
+        Surname2 = new javax.swing.JTextField();
+        DeleteStudent = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        StudentID = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        DeleteStudentButton = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        PrintCertificate = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        CertificateID = new javax.swing.JTextField();
+        SearchStudent = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        SearchCNIC = new javax.swing.JButton();
+        SearchStudentID = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        SearchStudentID1 = new javax.swing.JTextField();
+        SearchID1 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        EditStudent = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        StdName = new javax.swing.JTextField();
+        StdSurname = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        StdFatherCnic = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        StdDOB = new com.toedter.calendar.JDateChooser();
+        EditClasses = new javax.swing.JComboBox<>();
+        jLabel37 = new javax.swing.JLabel();
+        GFEMALE1 = new javax.swing.JRadioButton();
+        GMALE1 = new javax.swing.JRadioButton();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        Address1 = new javax.swing.JTextField();
+        Contact1 = new javax.swing.JLabel();
+        EditContact = new javax.swing.JTextField();
+        EditNationality = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
+        Editrel = new javax.swing.JComboBox<>();
+        jLabel41 = new javax.swing.JLabel();
+        SaveData1 = new javax.swing.JButton();
+        StdFather = new javax.swing.JTextField();
+        StdID = new javax.swing.JTextField();
+        GenerateLists = new javax.swing.JPanel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        ClassesForList = new javax.swing.JComboBox<>();
+        IsNameChecked = new javax.swing.JCheckBox();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        IsFatherNameChecked = new javax.swing.JCheckBox();
+        jLabel47 = new javax.swing.JLabel();
+        IsSurnameChecked = new javax.swing.JCheckBox();
+        jLabel48 = new javax.swing.JLabel();
+        IsAddChecked = new javax.swing.JCheckBox();
+        jLabel49 = new javax.swing.JLabel();
+        IsContactChecked = new javax.swing.JCheckBox();
+        jLabel50 = new javax.swing.JLabel();
+        IsDOBChecked = new javax.swing.JCheckBox();
+        jLabel51 = new javax.swing.JLabel();
+        IsReligionChecked = new javax.swing.JCheckBox();
+        Generate = new javax.swing.JButton();
+        StatisticReports = new javax.swing.JPanel();
+        jLabel52 = new javax.swing.JLabel();
+        GenderRatio = new javax.swing.JButton();
+        jLabel53 = new javax.swing.JLabel();
+        ClassStrenght = new javax.swing.JButton();
+        jLabel54 = new javax.swing.JLabel();
+        ReligiousRatio = new javax.swing.JButton();
+        jLabel55 = new javax.swing.JLabel();
+        ActiveDeactiveRatio = new javax.swing.JButton();
+        jLabel56 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Form");
+        setResizable(false);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("              MENU");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 200, 50));
+
+        Search.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        Search.setForeground(new java.awt.Color(255, 255, 255));
+        Search.setText("        SEARCH STUDENT");
+        Search.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 200, 50));
+
+        SearchStd.setBackground(new java.awt.Color(51, 51, 51));
+        SearchStd.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        SearchStd.setForeground(new java.awt.Color(102, 102, 102));
+        SearchStd.setToolTipText("");
+        SearchStd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchStdActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SearchStd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 200, 50));
+
+        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("        STATISTIC REPORTS");
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 200, 50));
+
+        GLine.setFont(new java.awt.Font("Cooper Black", 1, 14)); // NOI18N
+        GLine.setForeground(new java.awt.Color(204, 204, 204));
+        GLine.setText("_________________________");
+        jPanel1.add(GLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 200, -1));
+
+        addemp.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        addemp.setForeground(new java.awt.Color(255, 255, 255));
+        addemp.setText("             ADD STUDENT");
+        addemp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(addemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 200, 50));
+
+        addempLine.setFont(new java.awt.Font("Cooper Black", 1, 14)); // NOI18N
+        addempLine.setForeground(new java.awt.Color(204, 204, 204));
+        addempLine.setText("_________________________");
+        jPanel1.add(addempLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 200, -1));
+
+        AddStd.setBackground(new java.awt.Color(51, 51, 51));
+        AddStd.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        AddStd.setForeground(new java.awt.Color(102, 102, 102));
+        AddStd.setToolTipText("");
+        AddStd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddStdActionPerformed(evt);
+            }
+        });
+        jPanel1.add(AddStd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 200, 50));
+
+        EditLine.setFont(new java.awt.Font("Cooper Black", 1, 14)); // NOI18N
+        EditLine.setForeground(new java.awt.Color(204, 204, 204));
+        EditLine.setText("_________________________");
+        jPanel1.add(EditLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 200, -1));
+
+        delLine.setFont(new java.awt.Font("Cooper Black", 1, 14)); // NOI18N
+        delLine.setForeground(new java.awt.Color(204, 204, 204));
+        delLine.setText("_________________________");
+        jPanel1.add(delLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 200, -1));
+
+        SearchLine.setFont(new java.awt.Font("Cooper Black", 1, 14)); // NOI18N
+        SearchLine.setForeground(new java.awt.Color(204, 204, 204));
+        SearchLine.setText("_________________________");
+        jPanel1.add(SearchLine, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 200, -1));
+
+        jLabel11.setFont(new java.awt.Font("Cooper Black", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel11.setText("_________________________");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 200, -1));
+
+        editEmp.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        editEmp.setForeground(new java.awt.Color(255, 255, 255));
+        editEmp.setText("            EDIT STUDENT");
+        editEmp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(editEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 200, 50));
+
+        Delemp.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        Delemp.setForeground(new java.awt.Color(255, 255, 255));
+        Delemp.setText("      DEACTIVATE STUDENT");
+        Delemp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(Delemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 200, 50));
+
+        generateList.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        generateList.setForeground(new java.awt.Color(255, 255, 255));
+        generateList.setText("          GENERATE LIST");
+        generateList.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(generateList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 200, 50));
+
+        GenerateList.setBackground(new java.awt.Color(51, 51, 51));
+        GenerateList.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        GenerateList.setForeground(new java.awt.Color(102, 102, 102));
+        GenerateList.setToolTipText("");
+        GenerateList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerateListActionPerformed(evt);
+            }
+        });
+        jPanel1.add(GenerateList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 200, 50));
+
+        DeleteStd.setBackground(new java.awt.Color(51, 51, 51));
+        DeleteStd.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        DeleteStd.setForeground(new java.awt.Color(102, 102, 102));
+        DeleteStd.setToolTipText("");
+        DeleteStd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteStdActionPerformed(evt);
+            }
+        });
+        jPanel1.add(DeleteStd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 200, 50));
+
+        EditStd.setBackground(new java.awt.Color(51, 51, 51));
+        EditStd.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        EditStd.setForeground(new java.awt.Color(102, 102, 102));
+        EditStd.setToolTipText("");
+        EditStd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditStdActionPerformed(evt);
+            }
+        });
+        jPanel1.add(EditStd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 200, 50));
+
+        StatisticReport.setBackground(new java.awt.Color(51, 51, 51));
+        StatisticReport.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        StatisticReport.setForeground(new java.awt.Color(102, 102, 102));
+        StatisticReport.setToolTipText("");
+        StatisticReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StatisticReportActionPerformed(evt);
+            }
+        });
+        jPanel1.add(StatisticReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 200, 50));
+
+        lgout.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lgout.setForeground(new java.awt.Color(255, 255, 255));
+        lgout.setText("                  Logout");
+        jPanel1.add(lgout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 200, 50));
+
+        Logout.setBackground(new java.awt.Color(51, 51, 51));
+        Logout.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        Logout.setForeground(new java.awt.Color(102, 102, 102));
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 200, 50));
+
+        stf.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        stf.setForeground(new java.awt.Color(255, 255, 255));
+        stf.setText("               Staff Portal");
+        jPanel1.add(stf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 200, 50));
+
+        StaffPortal.setBackground(new java.awt.Color(51, 51, 51));
+        StaffPortal.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        StaffPortal.setForeground(new java.awt.Color(102, 102, 102));
+        StaffPortal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StaffPortalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(StaffPortal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 200, 50));
+
+        jLabel12.setFont(new java.awt.Font("Cooper Black", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel12.setText("_________________________");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 200, -1));
+
+        Menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/BGImages/Menu (1).png"))); // NOI18N
+        jPanel1.add(Menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 550));
+
+        HideBar.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout HideBarLayout = new javax.swing.GroupLayout(HideBar);
+        HideBar.setLayout(HideBarLayout);
+        HideBarLayout.setHorizontalGroup(
+            HideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+        HideBarLayout.setVerticalGroup(
+            HideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(HideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 720, 30));
+
+        AddStudent.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Last Name:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 140, 30));
+
+        Nationality.setToolTipText("");
+        Nationality.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NationalityActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Nationality, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, 210, 30));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Date of Birth:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 140, 30));
+
+        Address.setToolTipText("");
+        Address.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddressActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Address, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("First Name:");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 140, 30));
+
+        FirstName.setToolTipText("");
+        FirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FirstNameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(FirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 200, 30));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Religion:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 80, 30));
+
+        LastName.setToolTipText("");
+        LastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LastNameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(LastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 210, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Father Name:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 140, 30));
+
+        FatherName.setToolTipText("");
+        FatherName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FatherNameActionPerformed(evt);
+            }
+        });
+        jPanel2.add(FatherName, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 200, 30));
+
+        DOB.setDateFormatString("dd/MM/yyyy");
+        jPanel2.add(DOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 210, 30));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Admission to grade:");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, 160, 30));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setText("Father CNIC:");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 140, 30));
+
+        GMALE.setText("Male");
+        jPanel2.add(GMALE, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
+
+        GFEMALE.setText("Female");
+        GFEMALE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GFEMALEActionPerformed(evt);
+            }
+        });
+        jPanel2.add(GFEMALE, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel15.setText("Nationality:");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, 140, 30));
+
+        Classes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Class PG", "Class One", "Class Two", "Class Three", "Class Four", "Class Five", "Class Six", "Class Seven", "Class Eight" }));
+        Classes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClassesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Classes, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, 150, 30));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel16.setText("Gender:");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 80, 30));
+
+        FatherCNIC1.setToolTipText("");
+        FatherCNIC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FatherCNIC1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(FatherCNIC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 200, 30));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setText("Surname:");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 140, 30));
+
+        Surname1.setToolTipText("");
+        Surname1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Surname1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Surname1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 210, 30));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel18.setText("Address:");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 80, 30));
+
+        rel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Islam", "Hindu", "Christianity", "Other" }));
+        jPanel2.add(rel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 200, 30));
+
+        SaveData.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        SaveData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/Icons/folder.png"))); // NOI18N
+        SaveData.setText("Save");
+        SaveData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveDataActionPerformed(evt);
+            }
+        });
+        jPanel2.add(SaveData, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 387, 120, 40));
+
+        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel2.setText("  Add Student");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 50));
+
+        Contact.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Contact.setText("Contact #:");
+        jPanel2.add(Contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 140, 30));
+
+        Surname2.setToolTipText("");
+        Surname2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Surname2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Surname2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 210, 30));
+
+        javax.swing.GroupLayout AddStudentLayout = new javax.swing.GroupLayout(AddStudent);
+        AddStudent.setLayout(AddStudentLayout);
+        AddStudentLayout.setHorizontalGroup(
+            AddStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+        );
+        AddStudentLayout.setVerticalGroup(
+            AddStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+        );
+
+        Forms.addTab("tab1", AddStudent);
+
+        DeleteStudent.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel19.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel19.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel19.setText("  Deactivate Student");
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 50));
+
+        jLabel21.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel21.setText("Enter ID:");
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, 30));
+
+        StudentID.setToolTipText("GR-10989");
+        StudentID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StudentIDActionPerformed(evt);
+            }
+        });
+        jPanel3.add(StudentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 230, 30));
+
+        jLabel22.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel22.setText("______________________________________________________________________");
+        jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 700, -1));
+
+        DeleteStudentButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        DeleteStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/Icons/student.png"))); // NOI18N
+        DeleteStudentButton.setText("Deactivate");
+        DeleteStudentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteStudentButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(DeleteStudentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 153, 160, 40));
+
+        jLabel23.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel23.setText("Want to Print Leaving Certificate (Transfer Ceritificate)");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 480, 20));
+
+        PrintCertificate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        PrintCertificate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/Icons/edit.png"))); // NOI18N
+        PrintCertificate.setText("Print");
+        PrintCertificate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintCertificateActionPerformed(evt);
+            }
+        });
+        jPanel3.add(PrintCertificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 110, 30));
+
+        jLabel24.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel24.setText("Enter Student ID:");
+        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 240, 30));
+
+        CertificateID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CertificateIDActionPerformed(evt);
+            }
+        });
+        jPanel3.add(CertificateID, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 230, 30));
+
+        javax.swing.GroupLayout DeleteStudentLayout = new javax.swing.GroupLayout(DeleteStudent);
+        DeleteStudent.setLayout(DeleteStudentLayout);
+        DeleteStudentLayout.setHorizontalGroup(
+            DeleteStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        DeleteStudentLayout.setVerticalGroup(
+            DeleteStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+        );
+
+        Forms.addTab("tab2", DeleteStudent);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel25.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel25.setText("  Search Student");
+        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 40));
+
+        jLabel26.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel26.setText("Enter Father's CNIC:");
+        jPanel4.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, 30));
+
+        SearchCNIC.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        SearchCNIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/Icons/student.png"))); // NOI18N
+        SearchCNIC.setText("Search");
+        SearchCNIC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchCNICActionPerformed(evt);
+            }
+        });
+        jPanel4.add(SearchCNIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 130, 40));
+
+        SearchStudentID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchStudentIDActionPerformed(evt);
+            }
+        });
+        jPanel4.add(SearchStudentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 180, 30));
+
+        jLabel27.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel27.setText("Note: In case if you forget your Student ID, you may go for the second option of Father's CNIC");
+        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 690, 70));
+
+        jLabel28.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel28.setText("Enter Student ID:");
+        jPanel4.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 120, 30));
+
+        SearchStudentID1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchStudentID1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(SearchStudentID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 180, 30));
+
+        SearchID1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        SearchID1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/Icons/student.png"))); // NOI18N
+        SearchID1.setText("Search");
+        SearchID1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchID1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(SearchID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 130, 40));
+
+        jLabel29.setFont(new java.awt.Font("Cooper Black", 1, 18)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel29.setText("______________________________________________________________________");
+        jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+
+        javax.swing.GroupLayout SearchStudentLayout = new javax.swing.GroupLayout(SearchStudent);
+        SearchStudent.setLayout(SearchStudentLayout);
+        SearchStudentLayout.setHorizontalGroup(
+            SearchStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        SearchStudentLayout.setVerticalGroup(
+            SearchStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        Forms.addTab("tab3", SearchStudent);
+
+        jLabel30.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel30.setText("Edit Student");
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel31.setText("Student ID :");
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel32.setText("Name:");
+
+        StdName.setToolTipText("");
+        StdName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StdNameActionPerformed(evt);
+            }
+        });
+
+        StdSurname.setToolTipText("");
+        StdSurname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StdSurnameActionPerformed(evt);
+            }
+        });
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel33.setText("Surname:");
+
+        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel34.setText("Father Name:");
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel35.setText("Father CNIC:");
+
+        StdFatherCnic.setToolTipText("");
+        StdFatherCnic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StdFatherCnicActionPerformed(evt);
+            }
+        });
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel36.setText("Date of Birth:");
+
+        StdDOB.setDateFormatString("dd/MM/yyyy");
+
+        EditClasses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Class PG", "Class One", "Class Two", "Class Three", "Class Four", "Class Five", "Class Six", "Class Seven", "Class Eight" }));
+        EditClasses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditClassesActionPerformed(evt);
+            }
+        });
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel37.setText("Admission to grade:");
+
+        GFEMALE1.setText("Female");
+        GFEMALE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GFEMALE1ActionPerformed(evt);
+            }
+        });
+
+        GMALE1.setText("Male");
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel38.setText("Gender:");
+
+        jLabel39.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel39.setText("Address:");
+
+        Address1.setToolTipText("");
+        Address1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Address1ActionPerformed(evt);
+            }
+        });
+
+        Contact1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Contact1.setText("Contact #:");
+
+        EditContact.setToolTipText("");
+        EditContact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditContactActionPerformed(evt);
+            }
+        });
+
+        EditNationality.setToolTipText("");
+        EditNationality.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditNationalityActionPerformed(evt);
+            }
+        });
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel40.setText("Nationality:");
+
+        Editrel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Islam", "Hindu", "Christianity", "Other" }));
+        Editrel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditrelActionPerformed(evt);
+            }
+        });
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel41.setText("Religion:");
+
+        SaveData1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        SaveData1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/Icons/folder.png"))); // NOI18N
+        SaveData1.setText("Save");
+        SaveData1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveData1ActionPerformed(evt);
+            }
+        });
+
+        StdFather.setToolTipText("");
+        StdFather.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StdFatherActionPerformed(evt);
+            }
+        });
+
+        StdID.setToolTipText("");
+        StdID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StdIDActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EditStudentLayout = new javax.swing.GroupLayout(EditStudent);
+        EditStudent.setLayout(EditStudentLayout);
+        EditStudentLayout.setHorizontalGroup(
+            EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditStudentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(EditStudentLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(StdFather, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(StdID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(StdFatherCnic, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Address1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Editrel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(387, Short.MAX_VALUE))
+            .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(EditStudentLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(EditStudentLayout.createSequentialGroup()
+                            .addGap(350, 350, 350)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(13, 13, 13)
+                            .addComponent(StdName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(EditStudentLayout.createSequentialGroup()
+                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(210, 210, 210)
+                            .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(EditStudentLayout.createSequentialGroup()
+                                    .addGap(110, 110, 110)
+                                    .addComponent(StdSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(EditStudentLayout.createSequentialGroup()
+                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(210, 210, 210)
+                            .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(EditStudentLayout.createSequentialGroup()
+                                    .addGap(110, 110, 110)
+                                    .addComponent(StdDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(EditStudentLayout.createSequentialGroup()
+                            .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addComponent(GMALE1)
+                            .addGap(23, 23, 23)
+                            .addComponent(GFEMALE1)
+                            .addGap(111, 111, 111)
+                            .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(EditClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(EditStudentLayout.createSequentialGroup()
+                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(270, 270, 270)
+                            .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Contact1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(EditStudentLayout.createSequentialGroup()
+                                    .addGap(110, 110, 110)
+                                    .addComponent(EditContact, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(EditStudentLayout.createSequentialGroup()
+                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(270, 270, 270)
+                            .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(EditStudentLayout.createSequentialGroup()
+                                    .addGap(110, 110, 110)
+                                    .addComponent(EditNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(EditStudentLayout.createSequentialGroup()
+                            .addGap(110, 110, 110)
+                            .addComponent(SaveData1)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        EditStudentLayout.setVerticalGroup(
+            EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditStudentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StdID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(StdFather, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(StdFatherCnic, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(Address1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Editrel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(177, Short.MAX_VALUE))
+            .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(EditStudentLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(StdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(20, 20, 20)
+                    .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(StdSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(20, 20, 20)
+                    .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(StdDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(20, 20, 20)
+                    .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(GMALE1)
+                        .addComponent(GFEMALE1)
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EditClasses, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(20, 20, 20)
+                    .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Contact1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EditContact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(20, 20, 20)
+                    .addGroup(EditStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EditNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(80, 80, 80)
+                    .addComponent(SaveData1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        Forms.addTab("tab4", EditStudent);
+
+        jLabel43.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel43.setText("Generate List");
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel44.setText("Select Class:");
+
+        ClassesForList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Class PG", "Class One", "Class Two", "Class Three", "Class Four", "Class Five", "Class Six", "Class Seven", "Class Eight" }));
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel45.setText("Name:");
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel46.setText("Surname:");
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel47.setText("Father Name:");
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel48.setText("Address:");
+
+        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel49.setText("Contact#:");
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel50.setText("Religion:");
+
+        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel51.setText("Date of Birth:");
+
+        Generate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Generate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/Icons/job.png"))); // NOI18N
+        Generate.setText("Generate");
+        Generate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout GenerateListsLayout = new javax.swing.GroupLayout(GenerateLists);
+        GenerateLists.setLayout(GenerateListsLayout);
+        GenerateListsLayout.setHorizontalGroup(
+            GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GenerateListsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Generate)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IsNameChecked)
+                    .addComponent(ClassesForList, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IsFatherNameChecked)
+                    .addComponent(IsSurnameChecked)
+                    .addComponent(IsAddChecked)
+                    .addComponent(IsContactChecked)
+                    .addComponent(IsDOBChecked)
+                    .addComponent(IsReligionChecked))
+                .addContainerGap(292, Short.MAX_VALUE))
+        );
+        GenerateListsLayout.setVerticalGroup(
+            GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(GenerateListsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(IsSurnameChecked)
+                    .addGroup(GenerateListsLayout.createSequentialGroup()
+                        .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ClassesForList, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(IsNameChecked)
+                            .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IsFatherNameChecked))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IsAddChecked))
+                .addGap(18, 18, 18)
+                .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IsContactChecked))
+                .addGap(18, 18, 18)
+                .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IsDOBChecked)
+                    .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(GenerateListsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IsReligionChecked))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(Generate, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+
+        Forms.addTab("tab5", GenerateLists);
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel52.setText("Generate Statistical Reports of the School");
+
+        GenderRatio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/BGImages/genderRatio.png"))); // NOI18N
+        GenderRatio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenderRatioActionPerformed(evt);
+            }
+        });
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel53.setText(" Classes Strenght");
+
+        ClassStrenght.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/BGImages/Strenght.png"))); // NOI18N
+        ClassStrenght.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClassStrenghtActionPerformed(evt);
+            }
+        });
+
+        jLabel54.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel54.setText("Geneder Ratio");
+
+        ReligiousRatio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/BGImages/ReligiousRatio.png"))); // NOI18N
+        ReligiousRatio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReligiousRatioActionPerformed(evt);
+            }
+        });
+
+        jLabel55.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel55.setText(" Religion Ratio");
+
+        ActiveDeactiveRatio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/BGImages/Active.png"))); // NOI18N
+        ActiveDeactiveRatio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActiveDeactiveRatioActionPerformed(evt);
+            }
+        });
+
+        jLabel56.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel56.setText("Active and Deactive Students");
+
+        javax.swing.GroupLayout StatisticReportsLayout = new javax.swing.GroupLayout(StatisticReports);
+        StatisticReports.setLayout(StatisticReportsLayout);
+        StatisticReportsLayout.setHorizontalGroup(
+            StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StatisticReportsLayout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addGroup(StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(StatisticReportsLayout.createSequentialGroup()
+                        .addComponent(GenderRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131)
+                        .addComponent(ClassStrenght, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(StatisticReportsLayout.createSequentialGroup()
+                        .addComponent(jLabel54)
+                        .addGap(122, 122, 122)
+                        .addGroup(StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ActiveDeactiveRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addGroup(StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ReligiousRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(101, 101, 101))
+            .addGroup(StatisticReportsLayout.createSequentialGroup()
+                .addGroup(StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(StatisticReportsLayout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(StatisticReportsLayout.createSequentialGroup()
+                        .addGap(249, 249, 249)
+                        .addComponent(jLabel56)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        StatisticReportsLayout.setVerticalGroup(
+            StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(StatisticReportsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGroup(StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ClassStrenght, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(GenderRatio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ReligiousRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(StatisticReportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel53)
+                    .addComponent(jLabel55)
+                    .addComponent(jLabel54))
+                .addGap(37, 37, 37)
+                .addComponent(ActiveDeactiveRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel56)
+                .addGap(100, 100, 100))
+        );
+
+        Forms.addTab("tab6", StatisticReports);
+
+        jPanel1.add(Forms, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 720, 540));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Page/BGImages/820cce7f-0de0-4906-a734-236b8ae084c1.png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 570));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("        MENU");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 50));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+
+        new LoginPage().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_LogoutActionPerformed
+
+    private void AddStdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddStdActionPerformed
+            Forms.setSelectedIndex(0);
+
+    }//GEN-LAST:event_AddStdActionPerformed
+
+    private void StaffPortalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffPortalActionPerformed
+            new Staff().setVisible(true);
+            this.setVisible(false);
+    }//GEN-LAST:event_StaffPortalActionPerformed
+
+    private void NationalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NationalityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NationalityActionPerformed
+
+    private void AddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddressActionPerformed
+
+    private void FirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FirstNameActionPerformed
+
+    private void LastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LastNameActionPerformed
+
+    private void FatherNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FatherNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FatherNameActionPerformed
+
+    private void GFEMALEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GFEMALEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GFEMALEActionPerformed
+
+    private void ClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassesActionPerformed
+        
+    }//GEN-LAST:event_ClassesActionPerformed
+
+    private void FatherCNIC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FatherCNIC1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FatherCNIC1ActionPerformed
+
+    private void Surname1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Surname1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Surname1ActionPerformed
+
+    private void DeleteStdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteStdActionPerformed
+       Forms.setSelectedIndex(1);
+    }//GEN-LAST:event_DeleteStdActionPerformed
+
+    private void Surname2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Surname2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Surname2ActionPerformed
+
+    private void StudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StudentIDActionPerformed
+
+    private void SearchStdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchStdActionPerformed
+        Forms.setSelectedIndex(2);
+    }//GEN-LAST:event_SearchStdActionPerformed
+
+    private void SearchStudentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchStudentIDActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_SearchStudentIDActionPerformed
+
+    private void SearchStudentID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchStudentID1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_SearchStudentID1ActionPerformed
+
+    private void SaveDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveDataActionPerformed
+        // TODO add your handling code here:
+        
+        if(FirstName.getText() == null || LastName.getText() == null
+                || FatherName.getText() == null || Surname1.getText() == null
+                || FatherCNIC1.getText() == null || !DOB.isEnabled()
+                || (!GMALE.isSelected() && !GFEMALE.isSelected()) || Address.getText() == null
+                || Contact.getText() == null || Nationality.getText() == null) {
+            JOptionPane.showMessageDialog(null,"Please insert all fields");
+        }else{
+            String name = FirstName.getText().trim()+" "+LastName.getText().trim();
+            if(!isValidText(name)){
+                JOptionPane.showMessageDialog(null,"Invalid first or last name");
+                return;
+            }
+            
+            String father = FatherName.getText().trim();
+            if(!isValidText(father)){
+                JOptionPane.showMessageDialog(null,"Invalid father name");
+                return;
+            }
+            
+            String surname = Surname1.getText().trim();
+            if(!isValidText(surname)){
+                JOptionPane.showMessageDialog(null,"Invalid surname");
+                return;
+            }
+            
+            String cnic = FatherCNIC1.getText().trim();
+            if(!isValidCnic(cnic)){
+                JOptionPane.showMessageDialog(null,"Please insert the right cnic number. Use only numbers, no other symbols");
+                return;
+            }
+            
+            String birth = DateFormat.getDateInstance().format(DOB.getDate());
+            
+            String gender;
+            if(GMALE.isSelected() && GFEMALE.isSelected()){
+                JOptionPane.showMessageDialog(null,"Click at a single gender option");
+                return;
+            }
+            else if(GMALE.isSelected()){
+                gender =  GMALE.getText();
+            
+            }
+            else if(GFEMALE.isSelected()){
+                gender = GFEMALE.getText();
+            }
+            else{
+                 JOptionPane.showMessageDialog(null,"Click at a single gender option");
+                 return;   
+              }
+            
+            String clas = Classes.getSelectedItem() + "";
+            
+            String address = Address.getText().trim();
+            if(!isValidText(address)){
+                JOptionPane.showMessageDialog(null,"Invalid Address");
+                return;
+            }
+            
+            String contact = Surname2.getText().trim();
+            if(!isValidNum(contact)){
+                JOptionPane.showMessageDialog(null,"Please insert the right contact number. Use only numbers, no other symbols");
+                return;
+            }
+            
+            String nationality = Nationality.getText().trim();
+            if(!isValidText(nationality)){
+                JOptionPane.showMessageDialog(null,"Invalid Nationality");
+                return;
+            }
+            
+            String religion = rel.getSelectedItem() + "";
+            String id = "GR-00-0"+(students.size()+deactive.size()+1);
+            
+            Students std = new Students(name,father,surname,cnic,birth,gender,address,religion,nationality,clas,contact,id);
+            
+            students.add(std);
+            saveStudentsToFile();
+            this.dispose();
+            new Student().setVisible(true);
+        }
+        
+    }//GEN-LAST:event_SaveDataActionPerformed
+
+    private boolean isValidText(String text){
+        for(int i=0;i<text.length();i++){
+            char x = text.charAt(i);
+            if(!((x>='a' && x<='z' || (x>='A' && x<='Z') || x ==' '))){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private void StdNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StdNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StdNameActionPerformed
+
+    private void StdSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StdSurnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StdSurnameActionPerformed
+
+    private void StdFatherCnicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StdFatherCnicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StdFatherCnicActionPerformed
+
+    private void EditClassesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditClassesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditClassesActionPerformed
+
+    private void GFEMALE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GFEMALE1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GFEMALE1ActionPerformed
+
+    private void Address1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Address1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Address1ActionPerformed
+
+    private void EditContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditContactActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditContactActionPerformed
+
+    private void EditNationalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNationalityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditNationalityActionPerformed
+
+    private void SaveData1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveData1ActionPerformed
+        // TODO add your handling code here:
+        
+        if(StdID.getText() == null || StdName.getText() == null
+                || StdFather.getText() == null || StdSurname.getText() == null
+                || StdFatherCnic.getText() == null || !StdDOB.isEnabled()
+                || (!GMALE1.isSelected() && !GFEMALE1.isSelected()) || Address1.getText() == null
+                || EditContact.getText() == null || EditNationality.getText() == null) {
+            JOptionPane.showMessageDialog(null,"Please insert all fields");
+        }
+        else{
+            String id = StdID.getText();
+            Students obj = null;
+            
+            for(int i=0;i<students.size();i++){
+                if(id.equals(students.get(i).getId())){
+                    obj = students.get(i);
+                    break;
+                }
+            }
+            
+            if(obj == null){
+                JOptionPane.showMessageDialog(null,"No student found with gven id");
+                return;
+            }
+            
+            String name = StdName.getText();
+            if(!isValidText(name)){
+                JOptionPane.showMessageDialog(null,"Invalid name");
+                return;
+            }
+            
+            String father = StdFather.getText().trim();
+            if(!isValidText(father)){
+                JOptionPane.showMessageDialog(null,"Invalid father name");
+                return;
+            }
+            
+            String surname = StdSurname.getText().trim();
+            if(!isValidText(surname)){
+                JOptionPane.showMessageDialog(null,"Invalid surname");
+                return;
+            }
+            
+            String cnic = StdFatherCnic.getText().trim();
+            if(!isValidCnic(cnic)){
+                JOptionPane.showMessageDialog(null,"Please insert the right cnic number. Use only numbers, no other symbols");
+                return;
+            }
+            
+            String birth = DateFormat.getDateInstance().format(StdDOB.getDate());
+            
+            String gender;
+            if(GMALE1.isSelected() && GFEMALE1.isSelected()){
+                JOptionPane.showMessageDialog(null,"Click at a single gender option");
+                return;
+            }
+            else if(GMALE1.isSelected()){
+                gender =  GMALE1.getText();
+            }
+            else if(GFEMALE1.isSelected()){
+                gender = GFEMALE1.getText();
+            }
+            else{
+                 JOptionPane.showMessageDialog(null,"Click at a single gender option");
+                 return;   
+              }
+            
+            String clas = EditClasses.getSelectedItem() + "";
+            
+            String address = Address1.getText().trim();
+            if(!isValidText(address)){
+                JOptionPane.showMessageDialog(null,"Invalid Address");
+                return;
+            }
+            
+            String contact = EditContact.getText().trim();
+            if(!isValidNum(contact)){
+                JOptionPane.showMessageDialog(null,"Please insert the right contact number. Use only numbers, no other symbols");
+                return;
+            }
+            
+            String nationality = EditNationality.getText().trim();
+            if(!isValidText(nationality)){
+                JOptionPane.showMessageDialog(null,"Invalid Nationality");
+                return;
+            }
+            
+            String religion = Editrel.getSelectedItem() + "";
+            
+            for(int i=0;i<students.size();i++){
+                if(students.get(i).getId().equals(id)){
+                    students.get(i).setName(name);
+                    students.get(i).setFather(father);
+                    students.get(i).setSurname(surname);
+                    students.get(i).setCnic(cnic);
+                    students.get(i).setAddress(address);
+                    students.get(i).setBirthDate(birth);
+                    students.get(i).setClas(clas);
+                    students.get(i).setContact(contact);
+                    students.get(i).setGender(gender);
+                    students.get(i).setNationality(nationality);
+                    students.get(i).setReligion(religion);
+                }
+            }
+            
+            saveEditStudentsToFile();
+            this.dispose();
+            new Student().setVisible(true);
+        }
+    }//GEN-LAST:event_SaveData1ActionPerformed
+
+    private void GenerateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateListActionPerformed
+        Forms.setSelectedIndex(4);
+    }//GEN-LAST:event_GenerateListActionPerformed
+
+    private void EditStdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditStdActionPerformed
+         Forms.setSelectedIndex(3);
+    }//GEN-LAST:event_EditStdActionPerformed
+
+    private void StatisticReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatisticReportActionPerformed
+        Forms.setSelectedIndex(5);
+    }//GEN-LAST:event_StatisticReportActionPerformed
+
+    private void StdFatherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StdFatherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StdFatherActionPerformed
+
+    private void StdIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StdIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StdIDActionPerformed
+
+    private void GenderRatioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenderRatioActionPerformed
+               int male = 0;
+               int female =0;
+               ArrayList <Students> students = new ArrayList<Students>();
+        //READING FROM FILE AND PUTTING INTO ARRAYLIST
+            try(FileInputStream file2 = new FileInputStream("Students.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2)){
+            boolean endOfFile = false;
+            while(!endOfFile){
+                try{
+                    students.add((Students)inputFile2.readObject()); 
+                }
+                catch(EOFException e){
+                   endOfFile = true;
+                }
+                catch(Exception e){
+             //      JOptionPane.showMessageDialog(null,e.getMessage());
+                }
+            }
+        }
+        catch(IOException e){
+            //JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+            //COUNTING MALE AND FEMALE RATIO
+           String gender;
+            try{
+                for(int i=0; i<students.size(); i++){
+                gender = students.get(i).getGender();
+                
+                    if(gender.equals("Male"))
+                        male++;
+                    else if(gender.equals("Female"))
+                        female++;
+                
+                }
+             int total = male+female;
+             double percentFemale = (female*100)/total;
+             double percentMale = (male*100)/total;
+             GenderRatio frame1 = new GenderRatio(); 
+             frame1.setFemalePercent(percentFemale);
+             frame1.setMalePercent(percentMale);
+             frame1.GenerateChart();
+            } catch(Exception e){
+                }
+            
+            //JOptionPane.showMessageDialog(null,("Male: "+male+"Female: "+female));       
+            
+    }//GEN-LAST:event_GenderRatioActionPerformed
+
+    private void ClassStrenghtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassStrenghtActionPerformed
+        
+        int pg = 0,one=0,two=0,three=0,four=0,five=0,six=0,seven=0,eight = 0;    
+        
+        ArrayList <Students> List = new ArrayList<Students>();
+        //READING FROM FILE AND PUTTING INTO ARRAYLIST
+            try(FileInputStream file2 = new FileInputStream("Students.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2)){
+            boolean endOfFile = false;
+            while(!endOfFile){
+                try{
+                    List.add((Students)inputFile2.readObject()); 
+                }
+                catch(EOFException e){
+                   endOfFile = true;
+                }
+                catch(Exception e){
+             //      JOptionPane.showMessageDialog(null,e.getMessage());
+                }
+            }
+        }
+        catch(IOException e){
+            //JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+            String classes;
+        for(int i=0; i<List.size();i++){
+              classes = List.get(i).getClas();
+            switch (classes) {
+                case "Class PG":
+                    pg++;
+                    break;
+                case "Class One":
+                    one++;
+                    break;
+                case "Class Two":
+                    two++;
+                    break;
+                case "Class Three":
+                    three++;
+                    break;
+                case "Class Four":
+                    four++;
+                    break;
+                case "Class Five":
+                    five++;
+                    break;
+                case "Class Six":
+                    six++;
+                    break;
+                case "Class Seven":
+                    seven++;
+                    break;
+                case "Class Eight":
+                    eight++;
+                    break;
+                default:
+                    break;
+            }
+             
+        }    
+        ClassStrenght frame = new ClassStrenght();
+        frame.classStrength(pg, one, two, three, four, five, six, seven, eight);
+        frame.setVisible(true);
+        frame.setSize(1000,600);
+        frame.setResizable(false);
+    }//GEN-LAST:event_ClassStrenghtActionPerformed
+
+    private void ReligiousRatioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReligiousRatioActionPerformed
+        int islam=0,hindu=0,christ=0,other=0;    
+        ArrayList <Students> Lists = new ArrayList<Students>();
+        //READING FROM FILE AND PUTTING INTO ARRAYLIST
+            try(FileInputStream file2 = new FileInputStream("Students.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2)){
+            boolean endOfFile = false;
+            while(!endOfFile){
+                try{
+                    Lists.add((Students)inputFile2.readObject()); 
+                }
+                catch(EOFException e){
+                   endOfFile = true;
+                }
+                catch(Exception e){
+             //      JOptionPane.showMessageDialog(null,e.getMessage());
+                }
+            }
+        }
+        catch(IOException e){
+            //JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+          
+         String religion;
+         for(int i=0; i<Lists.size();i++){
+              religion = Lists.get(i).getReligion();
+            switch (religion) {
+                case "Islam":
+                    islam++;
+                    break;
+                case "Hindu":
+                    hindu++;
+                    break;
+                case "Christianity":
+                    christ++;
+                    break;
+                case "Other":
+                    other++;
+                    break;
+                default:
+                    break;
+            }
+        }
+            
+         ReligionRatio frame1 = new ReligionRatio();
+         frame1.religionRatio(islam, hindu, christ, other);
+        
+    }//GEN-LAST:event_ReligiousRatioActionPerformed
+
+    private void SearchID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchID1ActionPerformed
+        // TODO add your handling code here: String data = "";
+        String id = SearchStudentID1.getText();
+        
+        try(FileInputStream file2 = new FileInputStream("Students.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2)){
+            boolean endOfFile = false;
+            
+            while(!endOfFile){
+                try{
+                   Students obj =(Students) inputFile2.readObject();
+                   
+                        
+                   String sid = obj.getId()+"";
+                   
+                   if(sid.equals(id)){
+                        new SearchStd(obj);
+                        return;
+                   }
+                }
+                catch(EOFException e){
+                   endOfFile = true;
+                }
+                catch(Exception e){
+                   // JOptionPane.showMessageDialog(null,e.getMessage());
+                }
+            }
+        }
+        catch(IOException e){
+            //JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+          
+        JOptionPane.showMessageDialog(null,"No respective Student");
+    }//GEN-LAST:event_SearchID1ActionPerformed
+
+    private void SearchCNICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchCNICActionPerformed
+        // TODO add your handling code here:
+        
+        String id = SearchStudentID.getText();
+        
+        try(FileInputStream file2 = new FileInputStream("Students.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2)){
+            boolean endOfFile = false;
+            
+            while(!endOfFile){
+                try{
+                   Students obj =(Students) inputFile2.readObject();
+                   
+                        
+                   String sid = obj.getCnic()+"";
+                   
+                   if(sid.equals(id)){
+                        new SearchStd(obj);
+                        return;
+                   }
+                }
+                catch(EOFException e){
+                   endOfFile = true;
+                }
+                catch(Exception e){
+                   // JOptionPane.showMessageDialog(null,e.getMessage());
+                }
+            }
+        }
+        catch(IOException e){
+            //JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+          
+        JOptionPane.showMessageDialog(null,"No respective student");
+    }//GEN-LAST:event_SearchCNICActionPerformed
+
+    private void DeleteStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteStudentButtonActionPerformed
+        // TODO add your handling code here:
+        String id = StudentID.getText();
+        for(int i=0;i<students.size();i++){
+            Students obj = students.get(i);
+            if(obj.getId().equals(id)){
+                deactive.add(obj);
+                students.remove(i);
+                saveStudentsToFile();
+                saveDeactiveStudentsToFile();
+                this.dispose();
+                new Student().setVisible(true);
+                return;
+            }
+        }
+        
+    }//GEN-LAST:event_DeleteStudentButtonActionPerformed
+
+    private void EditrelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditrelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditrelActionPerformed
+
+    private void ActiveDeactiveRatioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActiveDeactiveRatioActionPerformed
+        int active = students.size();
+        int deact = deactive.size();
+        ActiveDeactiveRatio frame1 = new ActiveDeactiveRatio();
+        frame1.GenerateChart(active, deact);
+    }//GEN-LAST:event_ActiveDeactiveRatioActionPerformed
+
+    private void GenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateActionPerformed
+       String clas = ClassesForList.getSelectedItem()+"";
+            boolean name = IsNameChecked.isSelected();
+            boolean Fathername = IsFatherNameChecked.isSelected();
+            boolean surname = IsSurnameChecked.isSelected();
+            boolean address = IsAddChecked.isSelected();
+            boolean contact = IsContactChecked.isSelected();
+            boolean DoB = IsDOBChecked.isSelected();
+            boolean religion = IsReligionChecked.isSelected();
+            ArrayList <String> colName = new ArrayList<String>();
+           
+            for(int i=0; i<8; i++){
+                switch (i) {
+                    case 0:
+                        colName.add("StudentID");
+                        break;
+                    case 1:
+                        if(name){
+                            colName.add("Name") ;
+                            name = false;
+                        }
+                        else if(Fathername){
+                            colName.add("Father Name");
+                            Fathername = false;
+                        }
+                        
+                        else if(surname){
+                            colName.add("Surname");
+                            surname = false;
+                        }
+                        
+                        else if(address){
+                            colName.add("Address");
+                            address = false;
+                        }
+                        else if(contact){
+                            colName.add("Contact");
+                            contact = false;
+                        }
+                        
+                        else if(DoB){
+                            colName.add("Date of Birth");
+                            DoB = false;
+                        }
+                        
+                        else if(religion){
+                            colName.add("Religion");
+                            religion = false;
+                        }      break;
+                    case 2:
+                        if(name){
+                            colName.add("Name") ;
+                            name = false;
+                        }
+                        else if(Fathername){
+                            colName.add("Father Name");
+                            Fathername = false;
+                        }
+                        
+                        else if(surname){
+                            colName.add("Surname");
+                            surname = false;
+                        }
+                        
+                        else if(address){
+                            colName.add("Address");
+                            address = false;
+                        }
+                        else if(contact){
+                            colName.add("Contact");
+                            contact = false;
+                        }
+                        
+                        else if(DoB){
+                            colName.add("Date of Birth");
+                            DoB = false;
+                        }
+                        
+                        else if(religion){
+                            colName.add("Religion");
+                            religion = false;
+                        }      break;
+                    case 3:
+                        if(name){
+                            colName.add("Name") ;
+                            name = false;
+                        }
+                        else if(Fathername){
+                            colName.add("Father Name");
+                            Fathername = false;
+                        }
+                        
+                        else if(surname){
+                            colName.add("Surname");
+                            surname = false;
+                        }
+                        
+                        else if(address){
+                            colName.add("Address");
+                            address = false;
+                        }
+                        else if(contact){
+                            colName.add("Contact");
+                            contact = false;
+                        }
+                        
+                        else if(DoB){
+                            colName.add("Date of Birth");
+                            DoB = false;
+                        }
+                        
+                        else if(religion){
+                            colName.add("Religion");
+                            religion = false;
+                        }      break;
+                    case 4:
+                        if(name){
+                            colName.add("Name") ;
+                            name = false;
+                        }
+                        else if(Fathername){
+                            colName.add("Father Name");
+                            Fathername = false;
+                        }
+                        
+                        else if(surname){
+                            colName.add("Surname");
+                            surname = false;
+                        }
+                        
+                        else if(address){
+                            colName.add("Address");
+                            address = false;
+                        }
+                        else if(contact){
+                            colName.add("Contact");
+                            contact = false;
+                        }
+                        
+                        else if(DoB){
+                            colName.add("Date of Birth");
+                            DoB = false;
+                        }
+                        
+                        else if(religion){
+                            colName.add("Religion");
+                            religion = false;
+                        }      break;
+                    case 5:
+                        if(name){
+                            colName.add("Name") ;
+                            name = false;
+                        }
+                        else if(Fathername){
+                            colName.add("Father Name");
+                            Fathername = false;
+                        }
+                        
+                        else if(surname){
+                            colName.add("Surname");
+                            surname = false;
+                        }
+                        
+                        else if(address){
+                            colName.add("Address");
+                            address = false;
+                        }
+                        else if(contact){
+                            colName.add("Contact");
+                            contact = false;
+                        }
+                        
+                        else if(DoB){
+                            colName.add("Date of Birth");
+                            DoB = false;
+                        }
+                        
+                        else if(religion){
+                            colName.add("Religion");
+                            religion = false;
+                        }      break;
+                    case 6:
+                        if(name){
+                            colName.add("Name") ;
+                            name = false;
+                        }
+                        else if(Fathername){
+                            colName.add("Father Name");
+                            Fathername = false;
+                        }
+                        
+                        else if(surname){
+                            colName.add("Surname");
+                            surname = false;
+                        }
+                        
+                        else if(address){
+                            colName.add("Address");
+                            address = false;
+                        }
+                        else if(contact){
+                            colName.add("Contact");
+                            contact = false;
+                        }
+                        
+                        else if(DoB){
+                            colName.add("Date of Birth");
+                            DoB = false;
+                        }
+                        
+                        else if(religion){
+                            colName.add("Religion");
+                            religion = false;
+                        }      break;
+                    case 7:
+                        if(name){
+                            colName.add("Name") ;
+                            name = false;
+                        }
+                        else if(Fathername){
+                            colName.add("Father Name");
+                            Fathername = false;
+                        }
+                        
+                        else if(surname){
+                            colName.add("Surname");
+                            surname = false;
+                        }
+                        
+                        else if(address){
+                            colName.add("Address");
+                            address = false;
+                        }
+                        else if(contact){
+                            colName.add("Contact");
+                            contact = false;
+                        }
+                        
+                        else if(DoB){
+                            colName.add("Date of Birth");
+                            DoB = false;
+                        }
+                        
+                        else if(religion){
+                            colName.add("Religion");
+                            religion = false;
+                        }      break;
+                    default:
+                        break;
+                }
+             
+           }//Closing of checking selected items
+            ArrayList<String> rows = new ArrayList<String>();
+            for(int j=0; j<students.size(); j++){
+                if(students.get(j).getClas().equals(clas)){
+                    rows.add(students.get(j).getId());
+                
+                }
+            }
+           //Creating Table
+           DefaultTableModel model = new DefaultTableModel();
+           RecordTable table = new RecordTable();
+           table.TABLE.setModel(model);
+           model.setColumnCount(colName.size());
+           model.setRowCount(rows.size());
+           
+           
+           table.TABLE.setGridColor(Color.BLACK);
+            
+            //Changing the title of Columns/ 
+            for(int i=0; i<colName.size(); i++){
+                 ChangeName(table.TABLE , i, colName.get(i));
+                     int row = 0;
+                 //Checking for column and for class then filing the rows
+                    if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("StudentID")){
+                        for(int j=0; j<students.size(); j++){
+                                if(students.get(j).getClas().equals(clas)){
+                                
+                                    table.TABLE.setValueAt((students.get(j).getId()), row, i);
+                                    row++;
+                                }
+                                
+                         }
+                    } 
+           
+                   else if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("Name")){
+                        for(int j=0; j<students.size(); j++){
+                            if(students.get(j).getClas().equals(clas)){
+                                table.TABLE.setValueAt((students.get(j).getName()), row, i);
+                                  row++;
+                             
+                            }
+                            
+                         }
+                    }
+                    
+                      else if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("Father Name")){
+                        for(int j=0; j<students.size(); j++){
+                            if(students.get(j).getClas().equals(clas)){
+                                table.TABLE.setValueAt((students.get(j).getFather()), row, i);
+                                  row++;
+                             
+                            }
+                            
+                         }
+                         }
+                    
+                    
+                      else if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("Surname")){
+                        for(int j=0; j<students.size(); j++){
+                            if(students.get(j).getClas().equals(clas)){
+                                table.TABLE.setValueAt((students.get(j).getSurname()), row, i);
+                                  row++;
+                             
+                            }
+                            
+                         }
+                         }
+                    
+                    
+                      else if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("Address")){
+                        for(int j=0; j<students.size(); j++){
+                            if(students.get(j).getClas().equals(clas)){
+                                table.TABLE.setValueAt((students.get(j).getAddress()), row, i);
+                                  row++;
+                             
+                            }
+                            
+                         }
+                         }
+                 
+                   else if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("Contact")){
+                        for(int j=0; j<students.size(); j++){
+                            if(students.get(j).getClas().equals(clas)){
+                                table.TABLE.setValueAt((students.get(j).getContact()), row, i);
+                                  row++;
+                             
+                            }
+                            
+                         }
+                         }
+                 
+                   else if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("Date of Birth")){
+                        for(int j=0; j<students.size(); j++){
+                            if(students.get(j).getClas().equals(clas)){
+                                table.TABLE.setValueAt((students.get(j).getBirthDate()), row, i);
+                                  row++;
+                             
+                            }
+                            
+                         }
+                         }
+                 
+                      else if(table.TABLE.getColumnModel().getColumn(i).getHeaderValue().equals("Religion")){
+                        for(int j=0; j<students.size(); j++){
+                            if(students.get(j).getClas().equals(clas)){
+                                table.TABLE.setValueAt((students.get(j).getReligion()), row, i);
+                                  row++;
+                             
+                            }
+                            
+                         }
+                         }
+                 
+            }    
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
+             
+             
+               table.setVisible(true);
+           
+    }//GEN-LAST:event_GenerateActionPerformed
+
+    private void PrintCertificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintCertificateActionPerformed
+        String id = CertificateID.getText();
+        PrintingCertificate certi =  new PrintingCertificate();    
+        Students std =  null;
+             
+            for(int i=0; i<deactive.size(); i++){
+                if(deactive.get(i).getId().equals(id)){
+                   std = deactive.get(i);
+                }
+                    
+            }
+            if(std != null){
+                certi.getIdentification(std);
+                certi.setVisible(true);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "ID not found, you may first delete the student");
+            
+            
+    }//GEN-LAST:event_PrintCertificateActionPerformed
+
+    private void CertificateIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CertificateIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CertificateIDActionPerformed
+
+    
+    public void ChangeName(JTable table, int col_index, String col_name){
+            table.getColumnModel().getColumn(col_index).setHeaderValue(col_name);
+     }
+        
+    private boolean isValidCnic(String cnic){
+        if(cnic.length() != 13){
+            return false;
+        }
+        for(int i=0;i<cnic.length();i++){
+            if (!(cnic.charAt(i)>='0' && cnic.charAt(i)<='9')){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private boolean isValidNum(String num){
+        if(num.length() != 11){
+            return false;
+        }
+        for(int i=0;i<num.length();i++){
+            if (!(num.charAt(i)>='0' && num.charAt(i)<='9')){
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(StudentForms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(StudentForms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(StudentForms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StudentForms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new StudentForms().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ActiveDeactiveRatio;
+    private javax.swing.JButton AddStd;
+    private javax.swing.JPanel AddStudent;
+    private javax.swing.JTextField Address;
+    private javax.swing.JTextField Address1;
+    private javax.swing.JTextField CertificateID;
+    private javax.swing.JButton ClassStrenght;
+    private javax.swing.JComboBox<String> Classes;
+    private javax.swing.JComboBox<String> ClassesForList;
+    private javax.swing.JLabel Contact;
+    private javax.swing.JLabel Contact1;
+    private com.toedter.calendar.JDateChooser DOB;
+    private javax.swing.JLabel Delemp;
+    private javax.swing.JButton DeleteStd;
+    private javax.swing.JPanel DeleteStudent;
+    private javax.swing.JButton DeleteStudentButton;
+    private javax.swing.JComboBox<String> EditClasses;
+    private javax.swing.JTextField EditContact;
+    private javax.swing.JLabel EditLine;
+    private javax.swing.JTextField EditNationality;
+    private javax.swing.JButton EditStd;
+    private javax.swing.JPanel EditStudent;
+    private javax.swing.JComboBox<String> Editrel;
+    private javax.swing.JTextField FatherCNIC1;
+    private javax.swing.JTextField FatherName;
+    private javax.swing.JTextField FirstName;
+    public javax.swing.JTabbedPane Forms;
+    private javax.swing.JRadioButton GFEMALE;
+    private javax.swing.JRadioButton GFEMALE1;
+    private javax.swing.JLabel GLine;
+    private javax.swing.JRadioButton GMALE;
+    private javax.swing.JRadioButton GMALE1;
+    private javax.swing.JButton GenderRatio;
+    private javax.swing.JButton Generate;
+    private javax.swing.JButton GenerateList;
+    private javax.swing.JPanel GenerateLists;
+    private javax.swing.JPanel HideBar;
+    private javax.swing.JCheckBox IsAddChecked;
+    private javax.swing.JCheckBox IsContactChecked;
+    private javax.swing.JCheckBox IsDOBChecked;
+    private javax.swing.JCheckBox IsFatherNameChecked;
+    private javax.swing.JCheckBox IsNameChecked;
+    private javax.swing.JCheckBox IsReligionChecked;
+    private javax.swing.JCheckBox IsSurnameChecked;
+    private javax.swing.JTextField LastName;
+    private javax.swing.JButton Logout;
+    private javax.swing.JLabel Menu;
+    private javax.swing.JTextField Nationality;
+    private javax.swing.JButton PrintCertificate;
+    private javax.swing.JButton ReligiousRatio;
+    private javax.swing.JButton SaveData;
+    private javax.swing.JButton SaveData1;
+    private javax.swing.JLabel Search;
+    private javax.swing.JButton SearchCNIC;
+    private javax.swing.JButton SearchID1;
+    private javax.swing.JLabel SearchLine;
+    private javax.swing.JButton SearchStd;
+    private javax.swing.JPanel SearchStudent;
+    private javax.swing.JTextField SearchStudentID;
+    private javax.swing.JTextField SearchStudentID1;
+    private javax.swing.JButton StaffPortal;
+    private javax.swing.JButton StatisticReport;
+    private javax.swing.JPanel StatisticReports;
+    private com.toedter.calendar.JDateChooser StdDOB;
+    private javax.swing.JTextField StdFather;
+    private javax.swing.JTextField StdFatherCnic;
+    private javax.swing.JTextField StdID;
+    private javax.swing.JTextField StdName;
+    private javax.swing.JTextField StdSurname;
+    private javax.swing.JTextField StudentID;
+    private javax.swing.JTextField Surname1;
+    private javax.swing.JTextField Surname2;
+    private javax.swing.JLabel addemp;
+    private javax.swing.JLabel addempLine;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel delLine;
+    private javax.swing.JLabel editEmp;
+    private javax.swing.JLabel generateList;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lgout;
+    private javax.swing.JComboBox<String> rel;
+    private javax.swing.JLabel stf;
+    // End of variables declaration//GEN-END:variables
+}
