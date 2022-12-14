@@ -1,0 +1,28 @@
+Task-01 : Reasoning
+Assume you have written some classes. Belatedly, you decide they should be split into three packages, as listed in the following table. Furthermore, assume the classes are currently in the default package (they have no package statements).
+
+
+4. Which line of code will you need to add to each source file to put each class in the right package?
+
+Destination Packages
+Package Name		Class Name	Line of Code
+01:mygame.server	Server		package mygame.server;
+02:mygame.shared	Utilities	package mygame.shared;
+03:mygame.client	Client		package mygame.client;
+
+5. To adhere to the directory structure, you will need to create some subdirectories in the development directory and put source files in the correct subdirectories. What subdirectories must you create? Which subdirectory does each source file go in?
+
+  01: mygame\server\Server.java
+  02: mygame\shared\Utilities.java
+  03: mygame\client\Client.java
+
+6. Do you think you'll need to make any other changes to the source files to make them compile correctly? If so, what?
+
+Ans: No I don't need to make any further changes.
+
+
+
+
+
+
+

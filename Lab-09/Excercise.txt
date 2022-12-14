@@ -1,0 +1,19 @@
+1) The definition of the class Packer includes no instance variables. So, why do we need to bother with an object of the class Packer ?Why not simply make all the methods static and call them with the class name Packer ?
+
+Ans : We can  not make the run method static on the fact that this method is not static in the Thread Class. For this reason, we can't change the nature or signature of run method in child class. Since, it is the entry point of our program and must be overridden by child classes.
+
+2) Because sleep is a static method, how can it possibly know what thread it needs to pause?
+Ans : It decide on the basis of context in which it is called.For example if it is called in the context of main thread, it will suspend its execution.
+
+3) Where was polymorphism used in the program in Display 9.2 ? 
+Ans : Packer packerThread = new Packer();
+         packerThread.start();
+	This method calls start of class Thread which calls run of Packer class due to polymorphism. It didn't call the run method of Thread class.
+
+
+4. In the run() method of Display 9.5 , make the thread sleep a random amount of time between one and fi ve milliseconds. You should see an increase in the number of problems caused by race conditions. Can you explain why?
+ans : Because the thread is sleeping only for small time, that's why it is not enough to handle the race problem.
+
+5. Here is some code that synchronizes thread access to a shared variable. How come it is not guaranteed to output 30,000 every time it is run?
+Ans : 
+ 
